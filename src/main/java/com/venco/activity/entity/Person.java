@@ -1,0 +1,35 @@
+package com.venco.activity.entity;
+
+import java.util.Date;
+
+public class Person {
+	private Integer id;
+	private String name;
+	private String note;
+	private Date date;//申请日期
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+}
