@@ -4,94 +4,76 @@
     <startEvent id="startevent1" name="Start"></startEvent>
     <userTask id="makeTarget" name="制定绩效目标" activiti:assignee="${targetMaker}"></userTask>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="makeTarget"></sequenceFlow>
-    <userTask id="targetApprove" name="绩效目标审核" activiti:assignee="${targetApprove}"></userTask>
+    <userTask id="targetApprove" name="直接上级审核" activiti:assignee="${targetApprove}"></userTask>
     <sequenceFlow id="flow2" sourceRef="makeTarget" targetRef="targetApprove"></sequenceFlow>
     <userTask id="selfEvaluation" name="绩效自评" activiti:assignee="${targetMaker}"></userTask>
-    <userTask id="firstScore" name="一评" activiti:assignee="${firstScore}"></userTask>
+    <userTask id="firstScore" name="直接上级评分、评级（MP）" activiti:assignee="${firstScore}"></userTask>
     <sequenceFlow id="flow4" sourceRef="selfEvaluation" targetRef="firstScore"></sequenceFlow>
-    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
-    <sequenceFlow id="flow5" sourceRef="targetApprove" targetRef="exclusivegateway1"></sequenceFlow>
-    <sequenceFlow id="flow6" sourceRef="exclusivegateway1" targetRef="selfEvaluation">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${sign=="ture"}]]></conditionExpression>
-    </sequenceFlow>
-    <userTask id="secondScore" name="二评" activiti:assignee="${secondScore}"></userTask>
+    <userTask id="secondScore" name="部门管理人校准（评级）" activiti:assignee="${secondScore}"></userTask>
     <sequenceFlow id="flow8" sourceRef="firstScore" targetRef="secondScore"></sequenceFlow>
-    <userTask id="finalScore" name="终评" activiti:assignee="${finalScore}"></userTask>
+    <userTask id="finalScore" name="分管合伙人校准（评级）" activiti:assignee="${finalScore}"></userTask>
     <sequenceFlow id="flow9" sourceRef="secondScore" targetRef="finalScore"></sequenceFlow>
     <endEvent id="endevent1" name="End"></endEvent>
     <sequenceFlow id="flow10" sourceRef="finalScore" targetRef="endevent1"></sequenceFlow>
-    <sequenceFlow id="flow11" sourceRef="exclusivegateway1" targetRef="finalScore">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${sign=="false"}]]></conditionExpression>
-    </sequenceFlow>
+    <sequenceFlow id="flow12" sourceRef="targetApprove" targetRef="selfEvaluation"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_jxlc">
     <bpmndi:BPMNPlane bpmnElement="jxlc" id="BPMNPlane_jxlc">
       <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="120.0" y="170.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="120.0" y="90.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="makeTarget" id="BPMNShape_makeTarget">
-        <omgdc:Bounds height="55.0" width="105.0" x="200.0" y="160.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="200.0" y="80.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="targetApprove" id="BPMNShape_targetApprove">
-        <omgdc:Bounds height="55.0" width="105.0" x="200.0" y="260.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="200.0" y="180.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="selfEvaluation" id="BPMNShape_selfEvaluation">
-        <omgdc:Bounds height="55.0" width="105.0" x="460.0" y="160.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="460.0" y="80.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="firstScore" id="BPMNShape_firstScore">
-        <omgdc:Bounds height="55.0" width="105.0" x="610.0" y="260.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
-        <omgdc:Bounds height="40.0" width="40.0" x="370.0" y="267.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="610.0" y="180.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="secondScore" id="BPMNShape_secondScore">
-        <omgdc:Bounds height="55.0" width="105.0" x="610.0" y="350.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="610.0" y="270.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="finalScore" id="BPMNShape_finalScore">
-        <omgdc:Bounds height="55.0" width="105.0" x="610.0" y="440.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="610.0" y="360.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="760.0" y="450.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="760.0" y="370.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
-        <omgdi:waypoint x="155.0" y="187.0"></omgdi:waypoint>
-        <omgdi:waypoint x="200.0" y="187.0"></omgdi:waypoint>
+        <omgdi:waypoint x="155.0" y="107.0"></omgdi:waypoint>
+        <omgdi:waypoint x="200.0" y="107.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
-        <omgdi:waypoint x="252.0" y="215.0"></omgdi:waypoint>
-        <omgdi:waypoint x="253.0" y="234.0"></omgdi:waypoint>
-        <omgdi:waypoint x="252.0" y="260.0"></omgdi:waypoint>
+        <omgdi:waypoint x="252.0" y="135.0"></omgdi:waypoint>
+        <omgdi:waypoint x="252.0" y="180.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
-        <omgdi:waypoint x="565.0" y="187.0"></omgdi:waypoint>
+        <omgdi:waypoint x="565.0" y="107.0"></omgdi:waypoint>
+        <omgdi:waypoint x="662.0" y="107.0"></omgdi:waypoint>
         <omgdi:waypoint x="662.0" y="187.0"></omgdi:waypoint>
-        <omgdi:waypoint x="662.0" y="260.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
-        <omgdi:waypoint x="305.0" y="287.0"></omgdi:waypoint>
-        <omgdi:waypoint x="370.0" y="287.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
-        <omgdi:waypoint x="410.0" y="287.0"></omgdi:waypoint>
-        <omgdi:waypoint x="512.0" y="287.0"></omgdi:waypoint>
-        <omgdi:waypoint x="512.0" y="215.0"></omgdi:waypoint>
+        <omgdi:waypoint x="662.0" y="149.0"></omgdi:waypoint>
+        <omgdi:waypoint x="662.0" y="180.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
-        <omgdi:waypoint x="662.0" y="315.0"></omgdi:waypoint>
-        <omgdi:waypoint x="662.0" y="350.0"></omgdi:waypoint>
+        <omgdi:waypoint x="662.0" y="235.0"></omgdi:waypoint>
+        <omgdi:waypoint x="662.0" y="270.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
-        <omgdi:waypoint x="662.0" y="405.0"></omgdi:waypoint>
-        <omgdi:waypoint x="662.0" y="440.0"></omgdi:waypoint>
+        <omgdi:waypoint x="662.0" y="325.0"></omgdi:waypoint>
+        <omgdi:waypoint x="662.0" y="360.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
-        <omgdi:waypoint x="715.0" y="467.0"></omgdi:waypoint>
-        <omgdi:waypoint x="760.0" y="467.0"></omgdi:waypoint>
+        <omgdi:waypoint x="715.0" y="387.0"></omgdi:waypoint>
+        <omgdi:waypoint x="760.0" y="387.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
-        <omgdi:waypoint x="390.0" y="307.0"></omgdi:waypoint>
-        <omgdi:waypoint x="390.0" y="467.0"></omgdi:waypoint>
-        <omgdi:waypoint x="610.0" y="467.0"></omgdi:waypoint>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="305.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="512.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="512.0" y="135.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
